@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% block content %}
+<table class="table">
+    <caption>Preguntas</caption>
+    <thead>
+        <tr>
+            <th>Pregunta</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% if preguntas %}
+            {% for pregunta in preguntas %}
+                <tr>
+                    <td>{{pregunta.pregunta}}</td>
+                </tr>
+            {% endfor %}
+        {% else %}
+            <td>Todavía no se han añadido preguntas a este test</td>
+        {% endif %}
+    </tbody>
+</table>
+{% endblock %}
