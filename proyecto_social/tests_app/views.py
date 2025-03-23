@@ -8,6 +8,7 @@ def crear_test(request):
         form = TestForm(request.POST)
         if form.is_valid():
             test = form.save(commit=False)
+            test.autor = request.user
             test.save()
             return redirect('index')
     else:

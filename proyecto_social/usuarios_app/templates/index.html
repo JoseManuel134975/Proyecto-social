@@ -1,5 +1,7 @@
 {% extends 'base.html' %} {% block content %} {% if request.user.age >= 18 %}
 <a href="{% url 'crear_test' %}" class="btn btn-primary">Crear test</a>
+{% else %}
+<h2 class="text-danger">Debes ser mayor de edad para poder crear tests</h2>
 {% endif %}
 
 <table class="table">
@@ -8,6 +10,7 @@
   </caption>
   <thead>
     <tr>
+      <th>Autor</th>
       <th>Nombre</th>
       <th>Descripción</th>
       <th>Fecha creación</th>
@@ -17,8 +20,9 @@
     </tr>
   </thead>
   <tbody>
-    {% for test in tests %}
+    {% if tests %} {% for test in tests %}
     <tr>
+      <td>{{test.autor}}</td>
       <td>{{test.nombre}}</td>
       <td>{{test.descripcion}}</td>
       <td>{{test.fecha_creacion}}</td>
@@ -47,7 +51,11 @@
         >
       </td>
     </tr>
-    {% endfor %}
+    {% endfor %} {% else %}
+    <tr>
+      <td>Todavía no hay tests creados</td>
+    </tr>
+    {% endif %}
   </tbody>
 </table>
 {% endblock %}
