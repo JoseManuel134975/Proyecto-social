@@ -18,7 +18,7 @@ from django.contrib import admin
 from django.urls import path
 from django.contrib.auth import views as auth_views
 from usuarios_app.views import salir, registro, index
-from tests_app.views import crear_test, agregar_pregunta, ver_preguntas
+from tests_app.views import crear_test, agregar_pregunta, ver_preguntas, editar_pregunta, eliminar_pregunta, eliminar_test
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -26,7 +26,10 @@ urlpatterns = [
     path('salir/', salir, name='salir'),
     path('registro/', registro, name='registro'),
     path('index/', index, name="index"),
+    path('eliminar_test/<int:pk>', eliminar_test, name="eliminar_test"),
     path('crear_test/', crear_test, name="crear_test"),
     path('agregar_pregunta/<int:pk>', agregar_pregunta, name="agregar_pregunta"),
+    path('editar_pregunta/<int:pkPregunta>/<int:pkTest>', editar_pregunta, name="editar_pregunta"),
+    path('eliminar_pregunta/<int:pkPregunta>/<int:pkTest>', eliminar_pregunta, name="eliminar_pregunta"),
     path('ver_preguntas/<int:pk>', ver_preguntas, name="ver_preguntas"),
 ]

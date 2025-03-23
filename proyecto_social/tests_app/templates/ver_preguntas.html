@@ -1,22 +1,42 @@
-{% extends 'base.html' %}
-{% block content %}
+{% extends 'base.html' %} {% block content %}
 <table class="table">
-    <caption>Preguntas</caption>
-    <thead>
-        <tr>
-            <th>Pregunta</th>
-        </tr>
-    </thead>
-    <tbody>
-        {% if preguntas %}
-            {% for pregunta in preguntas %}
-                <tr>
-                    <td>{{pregunta.pregunta}}</td>
-                </tr>
-            {% endfor %}
-        {% else %}
-            <td>Todavía no se han añadido preguntas a este test</td>
-        {% endif %}
-    </tbody>
+  <caption>
+    Preguntas
+  </caption>
+  <thead>
+    <tr>
+      <th>Pregunta</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% if preguntas %} {% for pregunta in preguntas %}
+    <tr>
+      <td>{{pregunta.pregunta}}</td>
+      {% if request.user.age >= 18 %}
+      <td>
+        <a
+          class="btn btn-primary"
+          href="{% url 'editar_pregunta' pregunta.id test.id %}"
+          >Editar</a
+        >
+      </td>
+      <td>
+        <form
+          method="POST"
+          action="{% url 'eliminar_pregunta' pregunta.id test.id %}"
+          onsubmit="return confirm('¿Seguro?')"
+        >
+          {% csrf_token %}
+          <button type="submit" value="borrar" class="btn btn-primary">
+            Eliminar
+          </button>
+        </form>
+      </td>
+      {% endif %}
+    </tr>
+    {% endfor %} {% else %}
+    <td>Todavía no se han añadido preguntas a este test</td>
+    {% endif %}
+  </tbody>
 </table>
 {% endblock %}

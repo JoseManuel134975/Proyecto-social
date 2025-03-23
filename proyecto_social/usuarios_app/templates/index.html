@@ -1,34 +1,53 @@
-{% extends 'base.html' %}
-{% block content %}
-    {% if request.user.age >= 18 %}
-        <a href="{% url 'crear_test' %}" class="btn btn-primary">Crear test</a>
-    {% endif %}
+{% extends 'base.html' %} {% block content %} {% if request.user.age >= 18 %}
+<a href="{% url 'crear_test' %}" class="btn btn-primary">Crear test</a>
+{% endif %}
 
-    <table class="table">
-        <caption>Tests</caption>
-        <thead>
-            <tr>
-                <th>Nombre</th>
-                <th>Descripción</th>
-                <th>Fecha creación</th>
-                <th></th>
-                <th></th>
-                <th></th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for test in tests %}
-                <tr>
-                    <td>{{test.nombre}}</td>
-                    <td>{{test.descripcion}}</td>
-                    <td>{{test.fecha_creacion}}</td>
-                    {% if request.user.age >= 18 %}
-                        <td><a href="{% url 'agregar_pregunta' test.id %}" class="btn btn-primary">Añadir preguntas</a></td>
-                        {% endif %}
-                    <td><a href="{% url 'ver_preguntas' test.id %}" class="btn btn-primary">Ver preguntas</a></td>
-                    <td><a href="{% url 'responder' test.id %}" class="btn btn-primary">Responder</a></td>
-                </tr>
-            {% endfor %}
-        </tbody>
-    </table>
+<table class="table">
+  <caption>
+    Tests
+  </caption>
+  <thead>
+    <tr>
+      <th>Nombre</th>
+      <th>Descripción</th>
+      <th>Fecha creación</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for test in tests %}
+    <tr>
+      <td>{{test.nombre}}</td>
+      <td>{{test.descripcion}}</td>
+      <td>{{test.fecha_creacion}}</td>
+      {% if request.user.age >= 18 %}
+      <td>
+        <a href="{% url 'agregar_pregunta' test.id %}" class="btn btn-primary"
+          >Añadir preguntas</a
+        >
+      </td>
+      <td>
+        <form
+          method="POST"
+          action="{% url 'eliminar_test' test.id %}"
+          onsubmit="return confirm('¿Seguro?')"
+        >
+          {% csrf_token %}
+          <button type="submit" value="borrar" class="btn btn-primary">
+            Eliminar
+          </button>
+        </form>
+      </td>
+      {% endif %}
+      <td>
+        <a href="{% url 'ver_preguntas' test.id %}" class="btn btn-primary"
+          >Ver preguntas</a
+        >
+      </td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
 {% endblock %}
