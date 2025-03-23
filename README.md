@@ -17,3 +17,16 @@ Utilizamos:
 2. Terraform.
 3. Docker.
 4. Jenkins.
+
+
+
+# GUÍA
+La aplicación se basa en la creación de tests psicológicos de autoevaluación. 
+Estos se pueden crear, se les pueden añadir preguntas, eliminar las mismas e incluso editarlas siempre y cuando el usuario registrado sea mayor de edad. En caso contrario, el usuario podrá ver el test con sus respectivas preguntas (de momento no puede responderlo, se implementará en el futuro).
+
+ESTÁ HECHO ÚNICAMENTE EN DJANGO, framework de PHP.
+
+- tests_app: App de Python para trabajar todo lo relacionado con los tests
+- usuarios_app: App de Python para trabajar todo lo relacionado con el inicio de sesión (mediante el token que usa Django por defecto)
+- db.sqlite3: BD que usa Django por defecto, en la cual se encuentran los modelos 
+- Modelos: Solo hay 3 -> Usuario, Test y Pregunta
