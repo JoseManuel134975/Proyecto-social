@@ -29,4 +29,4 @@ ESTÁ HECHO ÚNICAMENTE EN DJANGO, framework de PHP.
 - tests_app: App de Python para trabajar todo lo relacionado con los tests
 - usuarios_app: App de Python para trabajar todo lo relacionado con el inicio de sesión (mediante el token que usa Django por defecto)
 - db.sqlite3: BD que usa Django por defecto, en la cual se encuentran los modelos 
-- Modelos: Solo hay 3 -> Usuario, Test y Pregunta
+- Modelos: Solo hay 3 -> Usuario, Test y Pregunta || Un usuario puede tener varios test, un test es de un usuario, una pregunta puede ser de un solo test y un test puede tener varias preguntas
